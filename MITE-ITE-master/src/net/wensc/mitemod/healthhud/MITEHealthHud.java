@@ -2,6 +2,7 @@ package net.wensc.mitemod.healthhud;
 
 
 import net.wensc.mitemod.healthhud.trans.TransMarker;
+import net.wensc.mitemod.healthhud.util.Configs;
 import net.xiaoyu233.fml.AbstractMod;
 
 
@@ -26,6 +27,8 @@ public class MITEHealthHud extends AbstractMod {
 
 
     public void postInit() {
+        super.postInit();
+        Configs.loadConfigs();
     }
 
 
