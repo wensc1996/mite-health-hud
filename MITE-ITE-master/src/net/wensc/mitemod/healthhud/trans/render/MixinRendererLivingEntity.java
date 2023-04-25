@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(bhb.class)
+@Mixin(value = bhb.class, priority = 2000)
 public abstract class MixinRendererLivingEntity extends bgm{
 
 //    @Redirect(method = "b(Lnet/minecraft/EntityLiving;DDD)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/bhb;b(Lnet/minecraft/EntityLiving;)Z"))

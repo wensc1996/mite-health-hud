@@ -5,7 +5,7 @@ import net.minecraft.bgm;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(bgm.class)
+@Mixin(value = bgm.class, priority = 2000)
 public class MixinRender {
     @Shadow
     protected bgl b;
