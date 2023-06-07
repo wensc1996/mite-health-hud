@@ -37,10 +37,10 @@ public class MITEHealthHud extends AbstractMod {
     }
 
     public int modVerNum() {
-        return 2;
+        return 3;
     }
 
     public String modVerStr() {
-        return "0.0.2";
+        return "0.0.3";
     }
 }

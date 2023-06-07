@@ -19,7 +19,7 @@ public abstract class MixinRendererLivingEntity extends bgm{
 
     @Inject(method = "b(Lnet/minecraft/EntityLiving;DDD)V", at = @At("HEAD"))
     public void forceShowHealthHud(EntityLiving par1EntityLivingBase, double par2, double par4, double par6, CallbackInfo callbackInfo) {
-        if(!(par1EntityLivingBase instanceof EntityInvisibleStalker) && Minecraft.getClientPlayer().canSeeEntity(par1EntityLivingBase, false)) {
+        if(!(par1EntityLivingBase instanceof EntityInvisibleStalker) && Minecraft.getClientPlayer().canSeeEntity(par1EntityLivingBase, false) && par1EntityLivingBase.riddenByEntity == null) {
             float var8 = 1.6F;
             float var9 = 0.016666668F * var8;
             double var10 = par1EntityLivingBase.getDistanceSqToEntity(this.getRenderManager().h);
@@ -78,7 +78,11 @@ public abstract class MixinRendererLivingEntity extends bgm{
             var15.a(255, 0, 0, 200);
             var15.a((double)(-Configs.wenscConfig.healthHalfWidth.ConfigValue), (double)(var16), 0.0D);
             var15.a((double)(-Configs.wenscConfig.healthHalfWidth.ConfigValue), (double)(7 + var16), 0.0D);
-            float rate = 2f * (float)Configs.wenscConfig.healthHalfWidth.ConfigValue / par1EntityLivingBase.getMaxHealth() * par1EntityLivingBase.getHealth() - (float)Configs.wenscConfig.healthHalfWidth.ConfigValue;
+
+            float heath = par1EntityLivingBase.getHealth();
+            float maxHealth = par1EntityLivingBase.getMaxHealth() < heath ? heath : par1EntityLivingBase.getMaxHealth();
+
+            float rate = 2f * (float)Configs.wenscConfig.healthHalfWidth.ConfigValue / maxHealth * heath - (float)Configs.wenscConfig.healthHalfWidth.ConfigValue;
             var15.a((double)(rate), (double)(7 + var16), 0.0D);
             var15.a((double)(rate), (double)(var16), 0.0D);
 
@@ -86,7 +90,7 @@ public abstract class MixinRendererLivingEntity extends bgm{
             GL11.glEnable(3553);
 
             var16 = -11;
-            String health = (int)par1EntityLivingBase.getHealth() + "/" + (int)par1EntityLivingBase.getMaxHealth();
+            String health = (int)heath + "/" + (int)maxHealth;
             var12.b(health, -var12.a(health) / 2, var16, 16777215);
 
             GL11.glEnable(2929);
